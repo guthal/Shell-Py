@@ -1,5 +1,5 @@
 import sys
-
+import shutil
 
 def main():
     builtin=["echo","exit","type"]
@@ -11,10 +11,14 @@ def main():
             break
 
         elif command.startswith("echo "):
-            print(command[5:])
+            cmd=command[5:]
+            print(cmd)
         elif command.startswith("type "):
-            if command[5:] in builtin:
-                print(f"{command[5:]} is a shell builtin")
+            cmd=command[5:]
+            if cmd in builtin:
+                print(f"{cmd} is a shell builtin")
+            elif path := shutil.which(cmd):
+                print(f"{cmd} is {path}")
             else:
                 print(f"{command[5:]}: not found")
         else:
