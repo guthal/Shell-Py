@@ -22,6 +22,8 @@ def main():
                 print(f"{cmd} is {path}")
             else:
                 print(f"{command[5:]}: not found")
+        elif command.startswith("pwd"):
+            print(shutil.os.getcwd())
         else:
             args = shlex.split(command)
             if args and (path := shutil.which(args[0])):
