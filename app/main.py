@@ -4,7 +4,7 @@ import shlex
 import subprocess
 
 def main():
-    builtin=["echo","exit","type"]
+    builtin=["echo","exit","type","pwd"]
     while True:
         sys.stdout.write("$ ")
         command=input()
