@@ -1,11 +1,12 @@
 import sys
 import shutil
+import shlex
+import subprocess
 
 def main():
     builtin=["echo","exit","type"]
     while True:
         sys.stdout.write("$ ")
-        pass
         command=input()
         if command == "exit":
             break
@@ -22,7 +23,11 @@ def main():
             else:
                 print(f"{command[5:]}: not found")
         else:
-            print(f"{command}: command not found")
+            args = shlex.split(command)
+            if args and (path := shutil.which(args[0])):
+                subprocess.run(args, executable=path, check=False)
+            else:
+                print(f"{command}: command not found")
 
 
 if __name__ == "__main__":
